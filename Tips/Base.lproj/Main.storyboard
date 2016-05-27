@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Jh5-c6-UxF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -81,6 +81,13 @@
                             <outletCollection property="gestureRecognizers" destination="lYp-TN-Lix" appends="YES" id="gQ9-Ye-ZmG"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="3oB-V0-dLV">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="xRB-gg-TSM">
+                            <connections>
+                                <segue destination="7nM-VK-TUX" kind="push" id="LNy-Bx-DLZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="billField" destination="p1j-jS-Gdm" id="MaY-NE-2Pi"/>
                         <outlet property="tipControl" destination="edd-wz-IFW" id="W3Y-YS-M3S"/>
@@ -94,6 +101,39 @@
                         <action selector="onTap:" destination="BYZ-38-t0r" id="5cd-nT-DGa"/>
                     </connections>
                 </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="547" y="378"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="Fqz-gw-tq6">
+            <objects>
+                <viewController id="7nM-VK-TUX" customClass="SettingsViewController" customModule="Tips" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6dq-iz-oZD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ysQ-Vg-c47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L0U-7O-YDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="933" y="378"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Pco-Vx-axJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jh5-c6-UxF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7im-3G-ujn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="jQ5-wr-rHt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HAw-N1-nZs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="162" y="378"/>
         </scene>
