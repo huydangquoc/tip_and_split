@@ -109,16 +109,23 @@ class ViewController: UIViewController {
         
         switch roundOption {
         case 0:
-            tip = ceil(tip)
-            total = ceil(total)
+            if currencySymbol == currencySymbols[2] {
+                total = ceil(total/1000)*1000
+            } else {
+                total = ceil(total)
+            }
         case 2:
-            tip = floor(tip)
-            total = floor(total)
+            if currencySymbol == currencySymbols[2] {
+                total = floor(total/1000)*1000
+            } else {
+                total = floor(total)
+            }
         default: break
         }
         
         let numFormat = currencySymbol + "%.\(numDecimal)f"
         totalLabel.text = String(format: numFormat, total)
+        
     }
     
 //    override func viewDidAppear(animated: Bool) {
