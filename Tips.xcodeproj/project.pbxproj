@@ -37,6 +37,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B01EAC81CF9130400247C15 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6BB91AF31CF806AF00B27D1B /* ViewController.swift */,
+				6BB91B031CF81C0F00B27D1B /* SettingsViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		6BB91AE51CF806AE00B27D1B = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +65,12 @@
 		6BB91AF01CF806AF00B27D1B /* Tips */ = {
 			isa = PBXGroup;
 			children = (
+				6B01EAC81CF9130400247C15 /* Controller */,
 				6BB91AF11CF806AF00B27D1B /* AppDelegate.swift */,
-				6BB91AF31CF806AF00B27D1B /* ViewController.swift */,
 				6BB91AF51CF806AF00B27D1B /* Main.storyboard */,
 				6BB91AF81CF806AF00B27D1B /* Assets.xcassets */,
 				6BB91AFA1CF806AF00B27D1B /* LaunchScreen.storyboard */,
 				6BB91AFD1CF806AF00B27D1B /* Info.plist */,
-				6BB91B031CF81C0F00B27D1B /* SettingsViewController.swift */,
 			);
 			path = Tips;
 			sourceTree = "<group>";
@@ -297,6 +305,7 @@
 				6BB91B021CF806AF00B27D1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
