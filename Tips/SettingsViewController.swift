@@ -45,9 +45,8 @@ class SettingsViewController: UIViewController {
         themeControl.selectedSegmentIndex = defaults.integerForKey(SettingKeys.themeColorKey)
     }
     
-    func saveSettings() {
+    func saveChangedValues() {
         defaults.setInteger(satisfactionControl.selectedSegmentIndex, forKey: SettingKeys.satisfactionKey)
-        defaults.setObject(splitToField.text, forKey: SettingKeys.splitToKey)
         defaults.setInteger(roundOptionControl.selectedSegmentIndex, forKey: SettingKeys.roundOptKey)
         defaults.setInteger(currencySymbolControl.selectedSegmentIndex, forKey: SettingKeys.currencySymbolKey)
         defaults.setInteger(numOfDecimalControl.selectedSegmentIndex, forKey: SettingKeys.numOfDecimalKey)
@@ -75,7 +74,7 @@ class SettingsViewController: UIViewController {
     // MARK: actions
     
     @IBAction func onValueChanged(sender: AnyObject) {
-        saveSettings()
+        saveChangedValues()
     }
     
     @IBAction func onEditingChanged(sender: AnyObject) {

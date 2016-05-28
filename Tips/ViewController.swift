@@ -21,28 +21,55 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalTextLabel: UILabel!
     @IBOutlet weak var tipTextLabel: UILabel!
     
-    var tipPercentages = [0.05, 0.1, 0.15, 0.2, 0.25]
+    let tipPercentages = [0.05, 0.1, 0.15, 0.2, 0.25]
+    let currencySymbols = ["$", "€", "₫"]
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     var numDecimal = 0
+    var currencySymbol = ""
     
     // MARK: functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        tipLabel.text = "$0.00"
-        totalLabel.text = "$0.00"
-        billField.text = ""
-        splitToField.text = ""
+    }
+    
+    func loadSettings() {
+        // load currency symbol
+        let currencySymbolIndex = defaults.integerForKey(SettingKeys.currencySymbolKey)
+        currencySymbol = currencySymbols[currencySymbolIndex]
+        // load number of decimal
+        numDecimal = defaults.integerForKey(SettingKeys.numOfDecimalKey)
+        // load language
+        //let lang = defaults.integerForKey(SettingKeys.languageKey)
+        // load theme color
+        //let theme = defaults.integerForKey(SettingKeys.themeColorKey)
+        
+        // load tip rating
+        tipControl.selectedSegmentIndex = defaults.integerForKey(SettingKeys.satisfactionKey)
+        // load split to
+        if let splitToText = defaults.objectForKey(SettingKeys.splitToKey) as! String? {
+            splitToField.text = splitToText
+        } else {
+            splitToField.text = ""
+        }
+        // load round option
+        roundControl.selectedSegmentIndex = defaults.integerForKey(SettingKeys.roundOptKey)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: actions
     
-    @IBAction func onEditingChanged(sender: AnyObject) {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadSettings()
+        reCalculate()
+    }
+    
+    func reCalculate() {
         let billAmount = NSString(string: billField.text!).doubleValue
         let tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
         let splitTo = NSString(string: splitToField.text!).doubleValue
@@ -72,9 +99,27 @@ class ViewController: UIViewController {
         default: break
         }
         
-        let numFormat = "$%.\(numDecimal)f"
+        let numFormat = currencySymbol + "%.\(numDecimal)f"
         tipLabel.text = String(format: numFormat, tip)
         totalLabel.text = String(format: numFormat, total)
+    }
+    
+//    override func viewDidAppear(animated: Bool) {
+//        super.viewDidAppear(animated)
+//    }
+//    
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(animated)
+//    }
+//    
+//    override func viewDidDisappear(animated: Bool) {
+//        super.viewDidDisappear(animated)
+//    }
+    
+    // MARK: actions
+    
+    @IBAction func onEditingChanged(sender: AnyObject) {
+        reCalculate()
     }
     
     @IBAction func onTap(sender: AnyObject) {
