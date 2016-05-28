@@ -19,45 +19,56 @@ class ViewController: UIViewController {
     @IBOutlet weak var roundControl: UISegmentedControl!
     @IBOutlet weak var totalTextLabel: UILabel!
     @IBOutlet var separator: UIView!
+    @IBOutlet weak var tipTextLabel: UILabel!
+    @IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak var separator2: UIView!
     
     let tipPercentages = [0.05, 0.1, 0.15, 0.2, 0.25]
-    let currencySymbols = ["$", "€", "₫"]
+    let locales = [ NSLocale(localeIdentifier: "en_US"),
+                    NSLocale(localeIdentifier: "vi_VN")]
     let themeColors = [ UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
                         UIColor(red: 255/255, green: 255/255, blue: 230/255, alpha: 1),
                         UIColor(red: 230/255, green: 255/255, blue: 255/255, alpha: 1)]
     let defaults = NSUserDefaults.standardUserDefaults()
-    
-    var numDecimal = 0
-    var currencySymbol = ""
-    var themeColor: UIColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+    let formatter = NSNumberFormatter()
     
     // MARK: functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        billField.becomeFirstResponder()
     }
     
     func loadSettings() {
-        // load currency symbol
-        let currencySymbolIndex = defaults.integerForKey(SettingKeys.currencySymbolKey)
-        currencySymbol = currencySymbols[currencySymbolIndex]
-        // load number of decimal
-        numDecimal = defaults.integerForKey(SettingKeys.numOfDecimalKey)
-        // load language
-        //let lang = defaults.integerForKey(SettingKeys.languageKey)
-        // load theme color
-        themeColor = themeColors[defaults.integerForKey(SettingKeys.themeColorKey)]
+        // load locale
+        let localeIndex = defaults.integerForKey(SettingKeys.currencySymbolKey)
+        let numDecimal = defaults.integerForKey(SettingKeys.numOfDecimalKey)
+        formatter.numberStyle = .CurrencyStyle
+        formatter.locale = locales[localeIndex]
+        formatter.maximumFractionDigits = numDecimal
+        formatter.minimumFractionDigits = numDecimal
+        
+        // load theme color and apply
+        applyTheme(themeColors[defaults.integerForKey(SettingKeys.themeColorKey)])
         
         // load tip rating
         tipControl.selectedSegmentIndex = defaults.integerForKey(SettingKeys.satisfactionKey)
+        
         // load split to
         if let splitToText = defaults.objectForKey(SettingKeys.splitToKey) as! String? {
             splitToField.text = splitToText
         } else {
             splitToField.text = ""
         }
+        
         // load round option
         roundControl.selectedSegmentIndex = defaults.integerForKey(SettingKeys.roundOptKey)
+    }
+    
+    func applyTheme(color: UIColor) {
+        self.view.backgroundColor = color
+        billField.backgroundColor = color
+        splitToField.backgroundColor = color
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,10 +81,6 @@ class ViewController: UIViewController {
         
         loadSettings()
         reCalculate()
-        // apply themeColor.blueColor()
-        self.view.backgroundColor = themeColor
-        billField.backgroundColor = themeColor
-        splitToField.backgroundColor = themeColor
     }
     
     func showResult(state: Bool) {
@@ -81,6 +88,9 @@ class ViewController: UIViewController {
         totalLabel.hidden = state
         roundControl.hidden = state
         separator.hidden = state
+        tipTextLabel.hidden = state
+        tipLabel.hidden = state
+        separator2.hidden = state
     }
     
     func reCalculate() {
@@ -99,33 +109,38 @@ class ViewController: UIViewController {
         
         if splitTo > 1 {
             totalTextLabel.text = "Each"
+            tipTextLabel.text = "Each tip"
             tip = (billAmount * tipPercentage)/splitTo
             total = (billAmount + tip)/splitTo
         } else {
             totalTextLabel.text = "Total"
+            tipTextLabel.text = "Tip"
             tip = billAmount * tipPercentage
             total = billAmount + tip
         }
         
         switch roundOption {
         case 0:
-            if currencySymbol == currencySymbols[2] {
+            if formatter.currencySymbol ==  "₫" {
                 total = ceil(total/1000)*1000
+                tip = ceil(tip/1000)*1000
             } else {
                 total = ceil(total)
+                tip = ceil(tip)
             }
         case 2:
-            if currencySymbol == currencySymbols[2] {
+            if formatter.currencySymbol ==  "₫" {
                 total = floor(total/1000)*1000
+                tip = floor(tip/1000)*1000
             } else {
                 total = floor(total)
+                tip = floor(tip)
             }
         default: break
         }
         
-        let numFormat = currencySymbol + "%.\(numDecimal)f"
-        totalLabel.text = String(format: numFormat, total)
-        
+        totalLabel.text = formatter.stringFromNumber(total)
+        tipLabel.text = formatter.stringFromNumber(tip)
     }
     
 //    override func viewDidAppear(animated: Bool) {

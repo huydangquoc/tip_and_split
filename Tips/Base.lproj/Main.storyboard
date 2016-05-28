@@ -14,9 +14,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="elR-HC-BoW">
-                                <rect key="frame" x="20" y="271" width="93" height="25"/>
+                                <rect key="frame" x="20" y="309" width="80" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -67,8 +67,8 @@
                                     <action selector="onEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="VEr-gl-c56"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aKC-cy-lox">
-                                <rect key="frame" x="20" y="152" width="45" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aKC-cy-lox">
+                                <rect key="frame" x="20" y="152" width="65" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,18 +97,37 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" id="dpi-wa-vmm">
-                                <rect key="frame" x="20" y="356" width="280" height="5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DW1-lP-UHw">
-                                <rect key="frame" x="19" y="304" width="280" height="50"/>
+                                <rect key="frame" x="20" y="304" width="279" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7B9-Ob-XQJ">
+                                <rect key="frame" x="20" y="343" width="279" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="dpi-wa-vmm">
+                                <rect key="frame" x="19" y="331" width="280" height="3"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o24-0O-dhk">
+                                <rect key="frame" x="20" y="348" width="80" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="37K-M9-daJ">
+                                <rect key="frame" x="19" y="370" width="280" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -127,8 +146,11 @@
                         <outlet property="billField" destination="p1j-jS-Gdm" id="MaY-NE-2Pi"/>
                         <outlet property="roundControl" destination="CrH-b9-dys" id="yJC-Sd-c6Z"/>
                         <outlet property="separator" destination="dpi-wa-vmm" id="eF6-EB-5BJ"/>
+                        <outlet property="separator2" destination="37K-M9-daJ" id="J5k-ya-lIL"/>
                         <outlet property="splitToField" destination="0Rs-u9-J09" id="hlg-I7-mGK"/>
                         <outlet property="tipControl" destination="edd-wz-IFW" id="W3Y-YS-M3S"/>
+                        <outlet property="tipLabel" destination="7B9-Ob-XQJ" id="c9n-yh-U7a"/>
+                        <outlet property="tipTextLabel" destination="o24-0O-dhk" id="jfB-Tv-peL"/>
                         <outlet property="totalLabel" destination="DW1-lP-UHw" id="7k0-Qj-KyY"/>
                         <outlet property="totalTextLabel" destination="elR-HC-BoW" id="D5j-sr-BEV"/>
                     </connections>
@@ -233,7 +255,6 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <segments>
                                                         <segment title="$"/>
-                                                        <segment title="€"/>
                                                         <segment title="₫"/>
                                                     </segments>
                                                     <connections>
