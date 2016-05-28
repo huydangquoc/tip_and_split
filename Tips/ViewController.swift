@@ -20,13 +20,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var roundControl: UISegmentedControl!
     @IBOutlet weak var totalTextLabel: UILabel!
     @IBOutlet weak var tipTextLabel: UILabel!
+    @IBOutlet var separator: UIView!
     
     let tipPercentages = [0.05, 0.1, 0.15, 0.2, 0.25]
     let currencySymbols = ["$", "€", "₫"]
+    let themeColors = [ UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
+                        UIColor(red: 255/255, green: 255/255, blue: 230/255, alpha: 1),
+                        UIColor(red: 230/255, green: 255/255, blue: 255/255, alpha: 1)]
     let defaults = NSUserDefaults.standardUserDefaults()
     
     var numDecimal = 0
     var currencySymbol = ""
+    var themeColor: UIColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
     
     // MARK: functions
     
@@ -43,7 +48,7 @@ class ViewController: UIViewController {
         // load language
         //let lang = defaults.integerForKey(SettingKeys.languageKey)
         // load theme color
-        //let theme = defaults.integerForKey(SettingKeys.themeColorKey)
+        themeColor = themeColors[defaults.integerForKey(SettingKeys.themeColorKey)]
         
         // load tip rating
         tipControl.selectedSegmentIndex = defaults.integerForKey(SettingKeys.satisfactionKey)
@@ -56,7 +61,7 @@ class ViewController: UIViewController {
         // load round option
         roundControl.selectedSegmentIndex = defaults.integerForKey(SettingKeys.roundOptKey)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -67,6 +72,17 @@ class ViewController: UIViewController {
         
         loadSettings()
         reCalculate()
+        // apply themeColor.blueColor()
+        self.view.backgroundColor = themeColor
+    }
+    
+    func showResult(state: Bool) {
+        tipTextLabel.hidden = state
+        tipLabel.hidden = state
+        totalTextLabel.hidden = state
+        totalLabel.hidden = state
+        roundControl.hidden = state
+        separator.hidden = state
     }
     
     func reCalculate() {
@@ -76,6 +92,12 @@ class ViewController: UIViewController {
         let roundOption = roundControl.selectedSegmentIndex
         var tip: Double
         var total: Double
+        
+        if billAmount <= 0 {
+            showResult(true)
+        } else {
+           showResult(false)
+        }
         
         if splitTo > 1 {
             totalTextLabel.text = "Each"
