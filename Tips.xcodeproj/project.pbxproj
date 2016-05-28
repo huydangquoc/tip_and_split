@@ -14,7 +14,6 @@
 		6BB91AF71CF806AF00B27D1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BB91AF51CF806AF00B27D1B /* Main.storyboard */; };
 		6BB91AF91CF806AF00B27D1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BB91AF81CF806AF00B27D1B /* Assets.xcassets */; };
 		6BB91AFC1CF806AF00B27D1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BB91AFA1CF806AF00B27D1B /* LaunchScreen.storyboard */; };
-		6BB91B041CF81C0F00B27D1B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB91B031CF81C0F00B27D1B /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		6BB91AF81CF806AF00B27D1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6BB91AFB1CF806AF00B27D1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BB91AFD1CF806AF00B27D1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6BB91B031CF81C0F00B27D1B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				6BB91AF31CF806AF00B27D1B /* ViewController.swift */,
-				6BB91B031CF81C0F00B27D1B /* SettingsViewController.swift */,
 				6B01EACB1CF96CA900247C15 /* SettingsTableViewController.swift */,
 			);
 			name = Controller;
@@ -157,7 +154,6 @@
 				6B01EACC1CF96CA900247C15 /* SettingsTableViewController.swift in Sources */,
 				6BB91AF21CF806AF00B27D1B /* AppDelegate.swift in Sources */,
 				6B01EACA1CF91DA300247C15 /* Settings.swift in Sources */,
-				6BB91B041CF81C0F00B27D1B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

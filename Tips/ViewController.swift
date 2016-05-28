@@ -13,13 +13,11 @@ class ViewController: UIViewController {
     // MARK: properties
     
     @IBOutlet weak var billField: UITextField!
-    @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     @IBOutlet weak var splitToField: UITextField!
     @IBOutlet weak var roundControl: UISegmentedControl!
     @IBOutlet weak var totalTextLabel: UILabel!
-    @IBOutlet weak var tipTextLabel: UILabel!
     @IBOutlet var separator: UIView!
     
     let tipPercentages = [0.05, 0.1, 0.15, 0.2, 0.25]
@@ -74,11 +72,11 @@ class ViewController: UIViewController {
         reCalculate()
         // apply themeColor.blueColor()
         self.view.backgroundColor = themeColor
+        billField.backgroundColor = themeColor
+        splitToField.backgroundColor = themeColor
     }
     
     func showResult(state: Bool) {
-        tipTextLabel.hidden = state
-        tipLabel.hidden = state
         totalTextLabel.hidden = state
         totalLabel.hidden = state
         roundControl.hidden = state
@@ -101,12 +99,10 @@ class ViewController: UIViewController {
         
         if splitTo > 1 {
             totalTextLabel.text = "Each"
-            tipTextLabel.text = "Each tip"
             tip = (billAmount * tipPercentage)/splitTo
             total = (billAmount + tip)/splitTo
         } else {
             totalTextLabel.text = "Total"
-            tipTextLabel.text = "Tip"
             tip = billAmount * tipPercentage
             total = billAmount + tip
         }
@@ -122,7 +118,6 @@ class ViewController: UIViewController {
         }
         
         let numFormat = currencySymbol + "%.\(numDecimal)f"
-        tipLabel.text = String(format: numFormat, tip)
         totalLabel.text = String(format: numFormat, total)
     }
     
