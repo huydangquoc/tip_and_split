@@ -26,22 +26,20 @@ class ViewController: UIViewController {
     let tipPercentages = [0.05, 0.1, 0.15, 0.2, 0.25]
     let locales = [ NSLocale(localeIdentifier: "en_US"),
                     NSLocale(localeIdentifier: "vi_VN")]
+    let roundBases = [1.0, 1000.0]
     let themeColors = [ UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
                         UIColor(red: 255/255, green: 255/255, blue: 230/255, alpha: 1),
                         UIColor(red: 230/255, green: 255/255, blue: 255/255, alpha: 1)]
     let defaults = NSUserDefaults.standardUserDefaults()
     let formatter = NSNumberFormatter()
     
+    var localeIndex = 0
+    
     // MARK: functions
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        billField.becomeFirstResponder()
-    }
-    
     func loadSettings() {
-        // load locale
-        let localeIndex = defaults.integerForKey(SettingKeys.currencySymbolKey)
+        // load locale and format formatter
+        localeIndex = defaults.integerForKey(SettingKeys.currencySymbolKey)
         let numDecimal = defaults.integerForKey(SettingKeys.numOfDecimalKey)
         formatter.numberStyle = .CurrencyStyle
         formatter.locale = locales[localeIndex]
@@ -69,18 +67,6 @@ class ViewController: UIViewController {
         self.view.backgroundColor = color
         billField.backgroundColor = color
         splitToField.backgroundColor = color
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        loadSettings()
-        reCalculate()
     }
     
     func showResult(state: Bool) {
@@ -121,21 +107,11 @@ class ViewController: UIViewController {
         
         switch roundOption {
         case 0:
-            if formatter.currencySymbol ==  "₫" {
-                total = ceil(total/1000)*1000
-                tip = ceil(tip/1000)*1000
-            } else {
-                total = ceil(total)
-                tip = ceil(tip)
-            }
+            total = ceil(total/roundBases[localeIndex])*roundBases[localeIndex]
+            tip = ceil(tip/roundBases[localeIndex])*roundBases[localeIndex]
         case 2:
-            if formatter.currencySymbol ==  "₫" {
-                total = floor(total/1000)*1000
-                tip = floor(tip/1000)*1000
-            } else {
-                total = floor(total)
-                tip = floor(tip)
-            }
+            total = floor(total/roundBases[localeIndex])*roundBases[localeIndex]
+            tip = floor(tip/roundBases[localeIndex])*roundBases[localeIndex]
         default: break
         }
         
@@ -143,22 +119,70 @@ class ViewController: UIViewController {
         tipLabel.text = formatter.stringFromNumber(tip)
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(animated)
-//    }
-//    
-//    override func viewWillDisappear(animated: Bool) {
-//        super.viewWillDisappear(animated)
-//    }
-//    
-//    override func viewDidDisappear(animated: Bool) {
-//        super.viewDidDisappear(animated)
-//    }
+    func saveBillInfo() {
+        defaults.setObject(billField.text, forKey: Bill.Amount)
+        defaults.setObject(NSDate(), forKey: Bill.Time)
+        defaults.synchronize()
+    }
+    
+    func loadBillInfo() {
+        if let time = defaults.objectForKey(Bill.Time) as! NSDate? {
+            // get elapsed time
+            let elapsedTime = Int(NSDate().timeIntervalSinceDate(time))
+            // check if within 10 mins
+            if abs(elapsedTime) < 10*60 {
+                // load previous bill amount
+                if let billAmount = defaults.objectForKey(Bill.Amount) as! String? {
+                    billField.text = billAmount
+                }
+            }
+        }
+    }
+    
+    // MARK: life-cycle Event
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        billField.becomeFirstResponder()
+        print("viewDidLoad")
+        
+        loadBillInfo()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+        
+        loadSettings()
+        reCalculate()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear")
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     // MARK: actions
     
     @IBAction func onEditingChanged(sender: AnyObject) {
         reCalculate()
+        // save billInfo
+        saveBillInfo()
     }
     
     @IBAction func onTap(sender: AnyObject) {

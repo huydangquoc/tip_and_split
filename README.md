@@ -1,9 +1,5 @@
 # Pre-work - *Tip & Split*
 
-> HINT: Please
-> - include this README.md in your project and fill out the information. 
-> - remove all the HINT blocks in this file.
-
 **Tip & Split** is a tip calculator application for iOS.
 
 Submitted by: **Dang Quoc Huy**

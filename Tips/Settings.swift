@@ -17,3 +17,10 @@ struct SettingKeys {
     static let languageKey = "languageKey"
     static let themeColorKey = "themeColorKey"
 }
+
+struct Bill {
+    static let Amount = "billAmount"
+    static let TipPercentage = "billAmount"
+    static let SplitTo = "billAmount"
+    static let Time = "billTime"
+}
