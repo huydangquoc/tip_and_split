@@ -23,6 +23,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var separator2: UIView!
     
+    @IBOutlet weak var billTextLabel: UILabel!
+    @IBOutlet weak var tipPercentageTextLabel: UILabel!
+    @IBOutlet weak var shareTextLabel: UILabel!
+    
     let tipPercentages = [0.05, 0.1, 0.15, 0.2, 0.25]
     let locales = [ NSLocale(localeIdentifier: "en_US"),
                     NSLocale(localeIdentifier: "vi_VN")]
@@ -139,19 +143,40 @@ class ViewController: UIViewController {
         }
     }
     
+    func animateControls() {
+        // prepare control location
+        billTextLabel.frame.origin.x -= 100
+        tipPercentageTextLabel.frame.origin.x -= 100
+        shareTextLabel.frame.origin.x -= 100
+        
+        // let aminate something :-)
+        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            var billAmounLabeltFrame = self.billTextLabel.frame
+            var tipPercentageLabelFrame = self.tipPercentageTextLabel.frame
+            var shareLabelFrame = self.shareTextLabel.frame
+            
+            billAmounLabeltFrame.origin.x += 100
+            tipPercentageLabelFrame.origin.x += 100
+            shareLabelFrame.origin.x += 100
+            
+            self.billTextLabel.frame = billAmounLabeltFrame
+            self.tipPercentageTextLabel.frame = tipPercentageLabelFrame
+            self.shareTextLabel.frame = shareLabelFrame
+            
+            }, completion: nil)
+    }
+    
     // MARK: life-cycle Event
     
     override func viewDidLoad() {
         super.viewDidLoad()
         billField.becomeFirstResponder()
-        print("viewDidLoad")
         
         loadBillInfo()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
         
         loadSettings()
         reCalculate()
@@ -159,17 +184,16 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        print("viewDidAppear")
+        
+        animateControls()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        print("viewDidDisappear")
     }
     
     override func didReceiveMemoryWarning() {
@@ -181,7 +205,6 @@ class ViewController: UIViewController {
     
     @IBAction func onEditingChanged(sender: AnyObject) {
         reCalculate()
-        // save billInfo
         saveBillInfo()
     }
     
